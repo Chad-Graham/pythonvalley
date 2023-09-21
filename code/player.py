@@ -1,6 +1,5 @@
 import pygame
 from settings import *
-from support import *
 from os import walk
 
 class Player(pygame.sprite.Sprite):
@@ -86,7 +85,7 @@ class Player(pygame.sprite.Sprite):
 			self.status = self.status.split('_')[0] + '_idle'
 
 		# tool use
-		
+
 
 	def move(self,dt):
 
