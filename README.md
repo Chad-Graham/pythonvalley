@@ -1,3 +1,8 @@
-# pythonvalley
+Stardew Valley clone in Python
 
-# Stardew Valley clone using pygame
+Requirements:
+Python
+Pygame
+
+IN VSCode initialize .venv in root folder, local install python & pygame ( if not installed globally)
+Run main.py file in code folder 

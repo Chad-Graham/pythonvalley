@@ -1,6 +1,7 @@
 import pygame
 from settings import *
 from support import *
+from os import walk
 
 class Player(pygame.sprite.Sprite):
 	def __init__(self, pos, group):
@@ -11,7 +12,8 @@ class Player(pygame.sprite.Sprite):
 		self.frame_index = 0
 
 		# general setup
-		self.image = self.animations[self.status][self.frame_index]
+		self.image = self.animations[self.status] [self.frame_index]
+	
 		self.rect = self.image.get_rect(center = pos)
 
 		# movement attributes
@@ -27,13 +29,32 @@ class Player(pygame.sprite.Sprite):
 						   'right_water':[],'left_water':[],'up_water':[],'down_water':[]}
 
 		for animation in self.animations.keys():
-			full_path = '../graphics/character/' + animation
-			self.animations[animation] = import_folder(full_path)
+			for root, dirs, files in walk(".\graphics\character", topdown=True):
+        	    
+				print(root, dirs, files)
+				
+				surface_list = []
 
-	def animate(self,dt):
+				if animation == root.rpartition('\\')[-1]:
+					for file in files:
+						full_path = root + '\\' + file
+						image_surf = pygame.image.load(full_path).convert_alpha()
+						surface_list.append(image_surf) 
+
+					self.animations[animation] = surface_list
+
+		print(self.animations)
+
+			# this import_assets is a bit inelegant re: time complexity  
+
+			# full_path = '../graphics/character/' + animation
+			# self.animations[animation] = import_folder(full_path) 
+			# self.animations[animation] = import_folder(animation)
+
+	def animate(self, dt):
 		self.frame_index += 4 * dt
 		if self.frame_index >= len(self.animations[self.status]):
-			self.frame_index = 0
+			self.frame_index =0
 
 		self.image = self.animations[self.status][int(self.frame_index)]
 
@@ -59,12 +80,13 @@ class Player(pygame.sprite.Sprite):
 			self.direction.x = 0
 
 	def get_status(self):
-		
+
 		# idle
 		if self.direction.magnitude() == 0:
 			self.status = self.status.split('_')[0] + '_idle'
 
 		# tool use
+		
 
 	def move(self,dt):
 
@@ -80,9 +102,9 @@ class Player(pygame.sprite.Sprite):
 		self.pos.y += self.direction.y * self.speed * dt
 		self.rect.centery = self.pos.y
 
+
 	def update(self, dt):
 		self.input()
 		self.get_status()
-
 		self.move(dt)
 		self.animate(dt)
