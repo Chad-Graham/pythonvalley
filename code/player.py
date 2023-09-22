@@ -1,6 +1,6 @@
 import pygame
 from settings import *
-from os import walk
+from support import *
 from timer import Timer
 
 class Player(pygame.sprite.Sprite):
@@ -54,27 +54,8 @@ class Player(pygame.sprite.Sprite):
 						   'right_water':[],'left_water':[],'up_water':[],'down_water':[]}
 
 		for animation in self.animations.keys():
-			for root, dirs, files in walk(".\graphics\character", topdown=True):
-        	    
-				# print(root, dirs, files)
-				
-				surface_list = []
-
-				if animation == root.rpartition('\\')[-1]:
-					for file in files:
-						full_path = root + '\\' + file
-						image_surf = pygame.image.load(full_path).convert_alpha()
-						surface_list.append(image_surf) 
-
-					self.animations[animation] = surface_list
-
-		# print(self.animations)
-
-			# this import_assets is a bit inelegant re: time complexity  
-
-			# full_path = '../graphics/character/' + animation
-			# self.animations[animation] = import_folder(full_path) 
-			# self.animations[animation] = import_folder(animation)
+			full_path = animation
+			self.animations[animation] = import_folder(full_path)
 
 	def animate(self, dt):
 		self.frame_index += 4 * dt

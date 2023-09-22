@@ -6,7 +6,7 @@ class Game:
 	def __init__(self):
 		pygame.init()
 		self.screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
-		pygame.display.set_caption('Py Valley')
+		pygame.display.set_caption('Py Valley - Chad Graham')
 		self.clock = pygame.time.Clock()
 		self.level = Level()
 
