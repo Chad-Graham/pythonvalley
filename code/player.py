@@ -56,7 +56,7 @@ class Player(pygame.sprite.Sprite):
 		for animation in self.animations.keys():
 			for root, dirs, files in walk(".\graphics\character", topdown=True):
         	    
-				print(root, dirs, files)
+				# print(root, dirs, files)
 				
 				surface_list = []
 
@@ -68,7 +68,7 @@ class Player(pygame.sprite.Sprite):
 
 					self.animations[animation] = surface_list
 
-		print(self.animations)
+		# print(self.animations)
 
 			# this import_assets is a bit inelegant re: time complexity  
 
