@@ -9,24 +9,29 @@ class Overlay:
 		self.display_surface = pygame.display.get_surface()
 		self.player = player
 
-		# imports 
-		for root, dir, files in walk('.\graphics\overlay', topdown=True):
+		# imports
+		self.tools_surf = {} 
+		self.seeds_surf = {}
 
-			surface_list_1 = {}
-			surface_list_2 = {}
-			
-			for file in files:
+		full_path = f'.\graphics\overlay\\axe.png'
+		image_surf = pygame.image.load(full_path).convert_alpha()
+		self.tools_surf['axe'] = image_surf
 
-				full_path = root + '\\' + file
-				image_surf = pygame.image.load(full_path).convert_alpha()
+		full_path = f'.\graphics\overlay\hoe.png'
+		image_surf = pygame.image.load(full_path).convert_alpha()
+		self.tools_surf['hoe'] = image_surf
 
-				if file == 'axe.png' or file == 'hoe.png' or file == 'water.png':
-					surface_list_1[path.splitext(file)[0]] = image_surf
-					self.tools_surf = surface_list_1
-				
-				elif file == 'corn.png' or file == 'tomato.png':
-					surface_list_2[path.splitext(file)[0]] = image_surf	
-					self.seeds_surf = surface_list_2
+		full_path = f'.\graphics\overlay\water.png'
+		image_surf = pygame.image.load(full_path).convert_alpha()
+		self.tools_surf['water'] = image_surf
+		
+		full_path = f'.\graphics\overlay\corn.png'
+		image_surf = pygame.image.load(full_path).convert_alpha()
+		self.seeds_surf['corn'] = image_surf
+
+		full_path = f'.\graphics\overlay\\tomato.png'
+		image_surf = pygame.image.load(full_path).convert_alpha()
+		self.seeds_surf['tomato'] = image_surf
 
 	def display(self):
 
