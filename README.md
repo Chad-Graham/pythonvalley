@@ -9,3 +9,6 @@ Run main.py file in code folder
 
 + Arrow keys to move
 + Q to change tools
++ Spacebar to use tool
++ E to change seed
++ Left CTRL to use seed
